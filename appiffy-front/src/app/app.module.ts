@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home/home.component';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from './user/user.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
