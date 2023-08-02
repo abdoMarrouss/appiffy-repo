@@ -6,6 +6,6 @@ rm -f *.*
 sleep 1
 sleep 1
 
-# mget new build files 
-printf "\n** files copied successfully **\n"
+# get new build files 
+printf "\n** getting build files **\n"
 cp appiffy-front/dist/appiffy-front/* ./
