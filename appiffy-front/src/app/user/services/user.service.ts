@@ -11,8 +11,13 @@ export class UserService {
     }
 
 
-    getHellotest() {
-        return this.http.get(this.apiUrl, { responseType: 'text' }); 
+    // getHellotest() {
+    //     return this.http.get(this.apiUrl, { responseType: 'json' }); 
+    // }
+
+    findAll() {
+
+        return this.http.get(this.apiUrl, { responseType: 'json' })
     }
 
 }

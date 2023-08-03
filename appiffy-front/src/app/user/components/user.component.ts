@@ -12,8 +12,8 @@ export class UserComponent implements OnInit{
 
   ngOnInit() {
     
-    this.userServie.getHellotest().subscribe(data => {
-      console.log("this is the first data ", data);
+    this.userServie.findAll().subscribe(data => {
+      console.log("this is the user data ", data);
     })
   
   }
