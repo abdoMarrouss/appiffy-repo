@@ -11,10 +11,6 @@ export class UserController {
     todosService: any;
   constructor(private readonly userService: UserService) {}
 
-//   @Get()
-//   getHelloUser(): string {
-//     return this.userService.getHelloUser(); 
-//   }
   @Post()
   async create(@Body() createTodoDto: CreateUserDto) {
     const todo = await this.userService.create(createTodoDto);
