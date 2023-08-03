@@ -20,7 +20,7 @@ AppModule = __decorate([
             user_module_1.UserModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
-                host: '91.234.194.198',
+                host: 'localhost',
                 port: 3306,
                 username: 'c2169915c_appiffy',
                 password: 'appiffyAPPIFFY1234',
