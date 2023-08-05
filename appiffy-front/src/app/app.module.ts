@@ -1,27 +1,92 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+//swiper
+import { SwiperModule } from 'swiper/angular';
+
+// counter
+import { CountUpModule } from 'ngx-countup';
+
+// lightbox
+import { LightboxModule } from 'ngx-lightbox';
+
+// apexchart
+import { NgApexchartsModule } from 'ng-apexcharts';
+
+// store
+import { StoreModule } from '@ngrx/store';
+import { indexReducer } from './store/index.reducer';
+
+// service
+import { AppService } from './service/app.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home/home.component';
-import { HomeModule } from './home/home.module';
-import { HttpClientModule } from '@angular/common/http';
-import { UserModule } from './user/user.module';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+//Layout
+import { HeaderComponent } from './layout/header';
+import { FooterComponent } from './layout/footer';
+
+import { TestimonialComponent } from './components/testimonial';
+import { BlogSliderComponent } from './components/blog-slider';
+import { OfficeSwiperComponent } from './components/office-swiper';
+import { ProjectSliderComponent } from './components/project-slider';
+import { CounterComponent } from './components/counter';
+import { FaqAccordionComponent } from './components/faq-component';
+import { AboutUsComponent } from './home/about-us/about-us';
+import { ModalDialog } from './components/modal-dialog';
+import { ErrorComponent } from './home/error';
+import { IndexComponent } from './home';
+import { ContactusComponent } from './components/contactus-component';
+import { ServicesComponent } from './home/services';
+import { ServicesDetailComponent } from './home/services-detail';
+import { TeamComponent } from './home/team';
+import { CareerComponent } from './home/career';
+import { ContactUsComponent } from './home/contact-us';
+import { TermsConditionsComponent } from './home/terms-conditions';
+import { PrivacyPolicyComponent } from './home/privacy-policy';
+import { FaqComponent } from './home/faq';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule, 
-    HomeModule,
-    HttpClientModule,
-    UserModule
-  ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  bootstrap: [AppComponent]
+    declarations: [
+        ModalDialog,
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        ErrorComponent,
+        IndexComponent,
+        ContactusComponent,
+        ServicesComponent,
+        ServicesDetailComponent,
+        TeamComponent,
+        AboutUsComponent,
+        CareerComponent,
+        ContactUsComponent,
+        TermsConditionsComponent,
+        PrivacyPolicyComponent,
+        FaqComponent,
+        TestimonialComponent,
+        BlogSliderComponent,
+        OfficeSwiperComponent,
+        ProjectSliderComponent,
+        CounterComponent,
+        FaqAccordionComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        AppRoutingModule,
+        SwiperModule,
+        CountUpModule,
+        LightboxModule,
+        NgApexchartsModule,
+        StoreModule.forRoot({ index: indexReducer }),
+    ],
+    providers: [AppService, Title,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

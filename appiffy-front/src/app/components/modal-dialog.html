@@ -1,0 +1,30 @@
+<div
+    [hidden]="!(opened || openOnServerSide)"
+    class="fixed inset-0 z-[999] h-full w-full overflow-y-auto overflow-x-hidden bg-[#343434]/60"
+    (click)="closeByBackdrop()"
+    [ngClass]="{'modal-show' : opened || openOnServerSide}"
+>
+    <div
+        class="modal-popup-container animated absolute inset-0 h-full w-full text-center before:inline-block before:h-full before:align-middle"
+        [ngClass]="[full ? 'px-0 sm:px-3' : 'px-3']"
+    >
+        <div class="inline-block w-full text-left align-middle">
+            <div
+                class="relative mx-auto max-w-full overflow-hidden rounded bg-white p-8 text-sm text-gray shadow-lg"
+                [ngClass]="[full ? 'my-0 sm:my-8' : 'my-8', contentClass]"
+                [ngStyle]="{ width: width + 'px' }"
+                (click)="$event.stopPropagation()"
+            >
+                <button
+                    *ngIf="closeBtn"
+                    class="absolute top-2.5 right-2.5 z-10 flex h-8 w-8 items-center justify-center text-base text-black !no-underline opacity-100 hover:opacity-70"
+                    [ngClass]="[closeBtnClass]"
+                    (click)="close()"
+                >
+                    ✕
+                </button>
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div [ngClass]="mainClass">
+    <h3 *ngIf="title" class="mb-10 text-center text-2xl font-bold text-black dark:text-white lg:mb-14" [innerHTML]="title"></h3>
+    <swiper [config]="config">
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-1.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-2.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-3.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-4.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-5.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-6.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+        <ng-template swiperSlide>
+            <a href="javascript:"><img src="/assets/images/logo-7.svg" alt="" class="mx-auto transition hover:scale-110" /></a>
+        </ng-template>
+    </swiper>
+</div>

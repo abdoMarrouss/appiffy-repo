@@ -2,7 +2,7 @@
 # delete all angular build files in root directory 
 printf "\n** removing all build files **\n"
 rm -f *.* 
-
+rm -rf assets/
 sleep 1
 sleep 1
 
