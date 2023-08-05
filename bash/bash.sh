@@ -8,4 +8,5 @@ sleep 1
 
 # get new build files 
 printf "\n** getting build files **\n"
-cp appiffy-front/dist/appiffy-front/* ./
+cp appiffy-front/dist/* ./
+cp -R appiffy-front/dist/assets ./
