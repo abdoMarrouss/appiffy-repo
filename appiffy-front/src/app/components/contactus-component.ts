@@ -14,7 +14,7 @@ export class ContactusComponent {
     async initStore() {
         this.store
             .select((d) => d.index)
-            .subscribe((d) => { 
+            .subscribe((d:any) => { 
                 this.storeData = d;
             });
     }

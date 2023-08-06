@@ -7,7 +7,7 @@
     },
     "newProjectRoot": "projects",
     "projects": {
-        "plurk-angular": {
+        "appiffy-app": {
             "projectType": "application",
             "schematics": {},
             "root": "",
@@ -70,10 +70,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "plurk-angular:build:production"
+                            "browserTarget": "appiffy-app:build:production"
                         },
                         "development": {
-                            "browserTarget": "plurk-angular:build:development"
+                            "browserTarget": "appiffy-app:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "plurk-angular:build"
+                        "browserTarget": "appiffy-app:build"
                     }
                 },
                 "test": {
