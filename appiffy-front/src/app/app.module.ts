@@ -48,6 +48,8 @@ import { ContactUsComponent } from './home/contact-us';
 import { TermsConditionsComponent } from './home/terms-conditions';
 import { PrivacyPolicyComponent } from './home/privacy-policy';
 import { FaqComponent } from './home/faq';
+import { AdminModule } from './admin/admin.module';
+import { TestCompo } from './layout/test';
 
 
 @NgModule({
@@ -74,6 +76,7 @@ import { FaqComponent } from './home/faq';
         ProjectSliderComponent,
         CounterComponent,
         FaqAccordionComponent,
+        TestCompo
     ],
     imports: [
         BrowserModule,
@@ -84,6 +87,7 @@ import { FaqComponent } from './home/faq';
         CountUpModule,
         LightboxModule,
         NgApexchartsModule,
+        AdminModule,
         StoreModule.forRoot({ index: indexReducer }),
     ],
     providers: [AppService, Title,{provide: LocationStrategy, useClass: HashLocationStrategy}],

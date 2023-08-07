@@ -12,6 +12,7 @@ import { TermsConditionsComponent } from './home/terms-conditions';
 import { PrivacyPolicyComponent } from './home/privacy-policy';
 import { FaqComponent } from './home/faq';
 import { ErrorComponent } from './home/error';
+import { UserComponent } from './admin/components/userComponent/user/user.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
     { path: 'contact-us', component: ContactUsComponent, title: 'Contact Us ' },
     { path: 'terms-conditions', component: TermsConditionsComponent, title: 'Terms Conditions ' },
     { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy ' },
-    { path: 'faq', component: FaqComponent, title: 'FAQs ' },
+    {path: 'user', component: UserComponent},
 
     { path: '**', component: ErrorComponent },
 ];

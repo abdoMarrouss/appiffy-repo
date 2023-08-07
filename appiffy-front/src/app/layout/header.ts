@@ -1,19 +1,46 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import * as AOS from 'aos';
 
 @Component({
     moduleId: module.id,
     selector: 'header',
     templateUrl: './header.html',
-    styleUrls:['./header-style.scss']
+    // styleUrls:['./header-style.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
     storeData: any;
     showMenu = false;
     showSearch = false;
+    showTopButton = false;
+    headerClass = '';
     constructor(public store: Store<any>, public router: Router) {
         this.initStore();
+    }
+
+    ngOnInit() {
+        window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                this.showTopButton = true;
+                this.headerClass = 'sticky-header';
+            } else {
+                this.showTopButton = false;
+                this.headerClass = '';
+            }
+        });
+
+        // aos animation
+        AOS.init({
+            once: true,
+        });
+
+        // main loader
+        this.store.dispatch({ type: 'toggleMainLoader', payload: false });
+    }
+
+    ngOnDestroy() {
+        window.removeEventListener('scroll', () => {});
     }
     async initStore() {
         this.store
@@ -51,6 +78,10 @@ export class HeaderComponent {
       logData() {
         console.log('hello here : ');
       }
+      scrollToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0; 
+    }
     
       // Attach the event listener to bubbly buttons after the view initialization
       ngAfterViewInit() {
