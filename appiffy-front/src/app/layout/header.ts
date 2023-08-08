@@ -7,7 +7,6 @@ import * as AOS from 'aos';
     moduleId: module.id,
     selector: 'header',
     templateUrl: './header.html',
-    // styleUrls:['./header-style.scss']
 })
 export class HeaderComponent implements OnInit{
     storeData: any;
