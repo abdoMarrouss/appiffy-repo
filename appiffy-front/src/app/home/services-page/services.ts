@@ -1,16 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import SwiperCore, { SwiperOptions, Navigation, Autoplay } from 'swiper';
-import { ModalDialog } from '../components/modal-dialog';
+import * as AOS from 'aos';
+import { ModalDialog } from 'src/app/components/modal-dialog';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Autoplay]);
 @Component({
     moduleId: module.id,
     templateUrl: './services.html',
+    styleUrls:['./services-style.css']
 })
-export class ServicesComponent {
+export class ServicesComponent implements OnInit{
     storeData: any;
+    showTopButton = false;
+    headerClass = '';
+
     @ViewChild('modal') modal: ModalDialog | undefined;
     config: SwiperOptions = {
         loop: true,
@@ -40,6 +45,31 @@ export class ServicesComponent {
     constructor(public store: Store<any>) {
         this.initStore();
     }
+
+    ngOnInit() {
+        window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                this.showTopButton = true;
+                this.headerClass = 'sticky-header';
+            } else {
+                this.showTopButton = false;
+                this.headerClass = '';
+            }
+        });
+
+        // aos animation
+        AOS.init({
+            once: true,
+        });
+
+        // main loader
+        this.store.dispatch({ type: 'toggleMainLoader', payload: false });
+    }
+
+    ngOnDestroy() {
+        window.removeEventListener('scroll', () => {});
+    }
+
     async initStore() {
         this.store
             .select((d) => d.index)

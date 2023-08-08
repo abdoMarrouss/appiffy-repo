@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutUsComponent } from './home/about-us/about-us';
-import { IndexComponent } from './home';
-import { ServicesComponent } from './home/services';
 import { ServicesDetailComponent } from './home/services-detail';
 import { TeamComponent } from './home/team';
 import { CareerComponent } from './home/career';
@@ -13,6 +11,8 @@ import { PrivacyPolicyComponent } from './home/privacy-policy';
 import { FaqComponent } from './home/faq';
 import { ErrorComponent } from './home/error';
 import { UserComponent } from './admin/components/userComponent/user/user.component';
+import { ServicesComponent } from './home/services-page/services';
+import { IndexComponent } from './home/index-page';
 
 
 const routes: Routes = [

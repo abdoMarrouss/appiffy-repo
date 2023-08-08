@@ -38,9 +38,7 @@ import { FaqAccordionComponent } from './components/faq-component';
 import { AboutUsComponent } from './home/about-us/about-us';
 import { ModalDialog } from './components/modal-dialog';
 import { ErrorComponent } from './home/error';
-import { IndexComponent } from './home';
 import { ContactusComponent } from './components/contactus-component';
-import { ServicesComponent } from './home/services';
 import { ServicesDetailComponent } from './home/services-detail';
 import { TeamComponent } from './home/team';
 import { CareerComponent } from './home/career';
@@ -50,6 +48,8 @@ import { PrivacyPolicyComponent } from './home/privacy-policy';
 import { FaqComponent } from './home/faq';
 import { AdminModule } from './admin/admin.module';
 import { TestCompo } from './layout/test';
+import { ServicesComponent } from './home/services-page/services';
+import { IndexComponent } from './home/index-page';
 
 
 @NgModule({

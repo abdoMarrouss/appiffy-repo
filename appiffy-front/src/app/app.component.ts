@@ -13,12 +13,15 @@ export class AppComponent {
     constructor(public store: Store<any>, private service: AppService) {
         this.initStore();
     }
+    headerClass = '';
     ngOnInit() {
         window.addEventListener('scroll', () => {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 this.showTopButton = true;
+                this.headerClass = 'sticky-header';
             } else {
                 this.showTopButton = false;
+                this.headerClass = '';
             }
         });
 

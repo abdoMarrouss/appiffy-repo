@@ -5,6 +5,7 @@ import * as AOS from 'aos';
 @Component({
     moduleId: module.id,
     templateUrl: './index.html',
+    styleUrls: ['./index-style.css', './index-style.scss']
 })
 export class IndexComponent implements OnInit{
     storeData: any;

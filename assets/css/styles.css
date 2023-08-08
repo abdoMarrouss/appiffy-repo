@@ -64,3 +64,8 @@
 .lightbox .lb-zoomContainer {
     margin-right: 10px;
 }
+
+
+.sticky-header {
+    @apply bg-black shadow-lg;
+}
