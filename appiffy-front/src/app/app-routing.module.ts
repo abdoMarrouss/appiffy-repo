@@ -13,6 +13,7 @@ import { ErrorComponent } from './home/error';
 import { UserComponent } from './admin/components/userComponent/user/user.component';
 import { ServicesComponent } from './home/services-page/services';
 import { IndexComponent } from './home/index-page';
+import { AdminDashboardComponent } from './admin/components/admin-dashboard/admin-dashboard.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'terms-conditions', component: TermsConditionsComponent, title: 'Terms Conditions ' },
     { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy ' },
     {path: 'user', component: UserComponent},
+    {path: 'admin', component: AdminDashboardComponent},
 
     { path: '**', component: ErrorComponent },
 ];
