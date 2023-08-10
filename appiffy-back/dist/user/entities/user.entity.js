@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+const refreshSession_entity_1 = require("../../auth/entities/refreshSession.entity");
 const typeorm_1 = require("typeorm");
 let User = class User {
 };
@@ -20,13 +21,23 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], User.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false }),
-    __metadata("design:type", Boolean)
-], User.prototype, "complete", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => refreshSession_entity_1.RefreshSession, refreshSession => refreshSession.user),
+    __metadata("design:type", Array)
+], User.prototype, "sessions", void 0);
 User = __decorate([
-    (0, typeorm_1.Entity)('user')
+    (0, typeorm_1.Entity)('user'),
+    (0, typeorm_1.Index)(['username']),
+    (0, typeorm_1.Unique)('username', ['username'])
 ], User);
 exports.User = User;
 //# sourceMappingURL=user.entity.js.map

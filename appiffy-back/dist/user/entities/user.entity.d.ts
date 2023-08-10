@@ -1,5 +1,8 @@
+import { RefreshSession } from '../../auth/entities/refreshSession.entity';
 export declare class User {
     id: number;
-    name: string;
-    complete: boolean;
+    username: string;
+    email: string;
+    password: string;
+    sessions: RefreshSession[];
 }

@@ -8,18 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const user_module_1 = require("./user/user.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
+const app_controller_1 = require("./app.controller");
+const user_entity_1 = require("./user/entities/user.entity");
+const user_module_1 = require("./user/user.module");
+const auth_module_1 = require("./auth/auth.module");
+const refreshSession_entity_1 = require("./auth/entities/refreshSession.entity");
+const game_module_1 = require("./game/game.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            user_module_1.UserModule,
-            config_1.ConfigModule.forRoot(),
+        imports: [config_1.ConfigModule.forRoot({
+                isGlobal: true
+            }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
                 host: process.env.DB_HOST,
@@ -27,12 +30,15 @@ AppModule = __decorate([
                 username: process.env.DB_USERNAME,
                 password: process.env.DB_PASSWORD,
                 database: process.env.DB_NAME,
-                entities: ["dist/**/*.entity{.ts,.js}"],
                 synchronize: true,
+                logging: false,
+                entities: [user_entity_1.User, refreshSession_entity_1.RefreshSession],
             }),
+            user_module_1.UserModule,
+            auth_module_1.AuthModule,
+            game_module_1.GameModule
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [app_controller_1.AppController]
     })
 ], AppModule);
 exports.AppModule = AppModule;

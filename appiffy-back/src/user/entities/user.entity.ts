@@ -1,13 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
- 
+import { RefreshSession } from '../../auth/entities/refreshSession.entity'
+import { Entity, Column, PrimaryGeneratedColumn, Index, Unique, OneToMany } from 'typeorm'
+
 @Entity('user')
+@Index( ['username'] )
+@Unique( 'username', ['username'] ) 
 export class User {
+
   @PrimaryGeneratedColumn()
-  id: number;
- 
+  id: number
+
   @Column()
-  name: string;
- 
-  @Column({ default: false })
-  complete: boolean;
+  username: string
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string
+
+  @OneToMany(() => RefreshSession, refreshSession => refreshSession.user)
+  sessions: RefreshSession[]
+
 }
