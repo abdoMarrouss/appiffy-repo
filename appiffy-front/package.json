@@ -20,6 +20,7 @@
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",
     "@angular/forms": "^15.0.0",
+    "@angular/material": "^15.2.9",
     "@angular/platform-browser": "^15.2.9",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
@@ -28,6 +29,7 @@
     "@tailwindcss/typography": "^0.5.8",
     "aos": "^2.3.4",
     "apexcharts": "^3.36.3",
+    "font-awesome": "^4.7.0",
     "ng-apexcharts": "^1.7.4",
     "ngx-countup": "^13.1.0",
     "ngx-lightbox": "^2.4.1",
@@ -67,6 +69,6 @@
     "prettier-plugin-tailwindcss": "^0.2.1",
     "purgecss": "^5.0.0",
     "tailwindcss": "^3.2.4",
-    "typescript": "~4.8.2"
+    "typescript": "^4.8.2"
   }
 }

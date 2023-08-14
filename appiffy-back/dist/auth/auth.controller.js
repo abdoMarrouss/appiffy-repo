@@ -31,21 +31,21 @@ let AuthController = class AuthController {
 };
 __decorate([
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('auth/login'),
+    (0, common_1.Post)('login'),
     __param(0, (0, user_decorator_1.User)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
-    (0, common_1.Post)('auth/refresh'),
+    (0, common_1.Post)('refresh'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Refresh_dto_1.RefreshDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "refresh", null);
 AuthController = __decorate([
-    (0, common_1.Controller)(),
+    (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;

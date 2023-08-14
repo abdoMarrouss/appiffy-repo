@@ -10,10 +10,13 @@ import { TermsConditionsComponent } from './home/terms-conditions';
 import { PrivacyPolicyComponent } from './home/privacy-policy';
 import { FaqComponent } from './home/faq';
 import { ErrorComponent } from './home/error';
-import { UserComponent } from './admin/components/userComponent/user/user.component';
 import { ServicesComponent } from './home/services-page/services';
 import { IndexComponent } from './home/index-page';
 import { AdminDashboardComponent } from './admin/components/admin-dashboard/admin-dashboard.component';
+import { LoginComponent } from './admin/components/login/login.component';
+import { UserComponent } from './admin/components/userComponent/user.component';
+import { AdminGuard } from './admin/guards/admin.guard';
+import { LoginGuard } from './admin/guards/login.guard';
 
 
 const routes: Routes = [
@@ -27,7 +30,8 @@ const routes: Routes = [
     { path: 'terms-conditions', component: TermsConditionsComponent, title: 'Terms Conditions ' },
     { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy ' },
     {path: 'user', component: UserComponent},
-    {path: 'admin', component: AdminDashboardComponent},
+    {path: 'admin', component: AdminDashboardComponent, canActivate: [LoginGuard]},
+    {path: 'login', component: LoginComponent , canActivate: [AdminGuard]},
 
     { path: '**', component: ErrorComponent },
 ];
