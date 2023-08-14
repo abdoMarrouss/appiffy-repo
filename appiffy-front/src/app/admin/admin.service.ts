@@ -10,8 +10,8 @@ import { Observable } from "rxjs";
 })
 export class AdminService {
     
-    private apiUrl = 'http://localhost:3000';
-    // private apiUrl = 'https://api.appiffy.com'
+    // private apiUrl = 'http://localhost:3000';
+    private apiUrl = 'https://api.appiffy.com'
 
     constructor(private http: HttpClient) { }
 

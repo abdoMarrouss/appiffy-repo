@@ -50,7 +50,6 @@ import { AdminModule } from './admin/admin.module';
 import { TestCompo } from './layout/test';
 import { ServicesComponent } from './home/services-page/services';
 import { IndexComponent } from './home/index-page';
-import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -83,7 +82,6 @@ import { MatIconModule } from '@angular/material/icon';
         BrowserModule,
         BrowserAnimationsModule,
         CommonModule,
-        MatIconModule,
         AppRoutingModule,
         SwiperModule,
         CountUpModule,
