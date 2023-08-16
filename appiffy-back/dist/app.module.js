@@ -15,7 +15,8 @@ const user_entity_1 = require("./user/entities/user.entity");
 const user_module_1 = require("./user/user.module");
 const auth_module_1 = require("./auth/auth.module");
 const refreshSession_entity_1 = require("./auth/entities/refreshSession.entity");
-const game_module_1 = require("./game/game.module");
+const project_module_1 = require("./projects/project.module");
+const project_entity_1 = require("./projects/entities/project.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,11 +33,11 @@ AppModule = __decorate([
                 database: process.env.DB_NAME,
                 synchronize: true,
                 logging: false,
-                entities: [user_entity_1.User, refreshSession_entity_1.RefreshSession],
+                entities: [user_entity_1.User, refreshSession_entity_1.RefreshSession, project_entity_1.Project],
             }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
-            game_module_1.GameModule
+            project_module_1.ProjectModule
         ],
         controllers: [app_controller_1.AppController]
     })

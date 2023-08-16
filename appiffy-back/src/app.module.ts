@@ -8,7 +8,8 @@ import { User } from './user/entities/user.entity'
 import { UserModule } from './user/user.module'
 import { AuthModule } from './auth/auth.module'
 import { RefreshSession } from './auth/entities/refreshSession.entity'
-import { GameModule } from './game/game.module'
+import { ProjectModule } from './projects/project.module'
+import { Project } from './projects/entities/project.entity'
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -23,12 +24,12 @@ import { GameModule } from './game/game.module'
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
-    entities: [User, RefreshSession],
+    entities: [User, RefreshSession, Project],
   }),
 
     UserModule,
     AuthModule, 
-    GameModule
+    ProjectModule
   ],
   controllers: [AppController]
 })
