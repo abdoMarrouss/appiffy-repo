@@ -8,7 +8,7 @@ import { UpdateProjectDto } from "./dto/update-project.dto";
 
 
 @Controller("project")
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class ProjectController {
 
     constructor(private projectService: ProjectService) { }

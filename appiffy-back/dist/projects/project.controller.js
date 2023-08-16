@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectController = void 0;
 const common_1 = require("@nestjs/common");
 const project_service_1 = require("./project.service");
+const jwt_auth_guard_1 = require("../auth/jwt/jwt-auth.guard");
 const create_project_dto_1 = require("./dto/create-project.dto");
 const update_project_dto_1 = require("./dto/update-project.dto");
 let ProjectController = class ProjectController {
@@ -74,6 +75,7 @@ __decorate([
 ], ProjectController.prototype, "deleteProject", null);
 ProjectController = __decorate([
     (0, common_1.Controller)("project"),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [project_service_1.ProjectService])
 ], ProjectController);
 exports.ProjectController = ProjectController;

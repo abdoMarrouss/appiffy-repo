@@ -1,18 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css','./admin-dashboard-style.scss']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit  {
+export class SidebarComponent implements AfterViewInit, OnInit{
 
 
-
-  
   ngAfterViewInit() {
     const menuIcn = document.querySelector(".menuicn");
-    const nav = document.querySelector(".navcontainer");
+    const nav = document.querySelector(".custom-navcontainer");
 
     if (menuIcn && nav) {
       menuIcn.addEventListener("click", () => {
@@ -20,18 +18,14 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit  {
       });
     }
   }
-  ngOnInit() {
+
+  ngOnInit(): void {
     
-
   }
-
-
-
 
   goToPage() {
     // This will refresh the page and navigate to the '/admin' route
-    window.location.href = 'http://localhost:4209/#/admin/project';
+    window.location.href = 'http://localhost:4209/#/admin';
     location.reload();
   }
-
 }

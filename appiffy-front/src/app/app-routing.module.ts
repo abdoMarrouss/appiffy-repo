@@ -17,6 +17,7 @@ import { LoginComponent } from './admin/components/login/login.component';
 import { UserComponent } from './admin/components/userComponent/user.component';
 import { AdminGuard } from './admin/guards/admin.guard';
 import { LoginGuard } from './admin/guards/login.guard';
+import { ProjectComponent } from './admin/components/project/list-project/project.component';
 
 
 const routes: Routes = [
@@ -32,8 +33,9 @@ const routes: Routes = [
     {path: 'user', component: UserComponent},
     {path: 'admin', component: AdminDashboardComponent, canActivate: [LoginGuard]},
     {path: 'login', component: LoginComponent , canActivate: [AdminGuard]},
-
+    {path:'admin/project', component: ProjectComponent, canActivate:[LoginGuard]},
     { path: '**', component: ErrorComponent },
+
 ];
 
 @NgModule({
