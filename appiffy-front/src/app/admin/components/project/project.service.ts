@@ -8,7 +8,9 @@ import { Project } from "./project.entity";
 @Injectable()
 export class ProjectService {
 
-    private apiUrl = "http://localhost:3000/project";
+    // private apiUrl = "http://localhost:3000/project";
+    private apiUrl = 'https://api.appiffy.com/project'
+
     constructor(private http: HttpClient) {
     }
 
