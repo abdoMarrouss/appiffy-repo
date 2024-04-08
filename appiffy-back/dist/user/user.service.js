@@ -25,9 +25,10 @@ let UserService = class UserService {
         return await this.userRepository.find();
     }
     async getUserById(id) {
-        let user = await this.userRepository.findOne(id, { select: ['id', 'username'] });
-        if (!user)
+        const user = await this.userRepository.findOne({ where: { id } });
+        if (!user) {
             throw new common_1.NotFoundException('User is not found');
+        }
         return user;
     }
     async getUserByUsername(username) {

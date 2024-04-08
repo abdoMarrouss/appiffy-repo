@@ -25,7 +25,7 @@ export class ProjectService {
     }
 
     async getProjectById(id: number): Promise<Project> {
-        const project = await this.projectRepository.findOne(id);
+        const project = await this.projectRepository.findOne({ where: { id } });
         if (!project) {
             throw new NotFoundException(`Project with ID ${id} not found`);
         }

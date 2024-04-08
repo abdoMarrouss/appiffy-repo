@@ -1,5 +1,5 @@
 export declare class Project {
-    id: string;
+    id: number;
     projectName: string;
     projectDescription: string;
     projectType: string;

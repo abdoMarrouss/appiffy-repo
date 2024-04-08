@@ -18,6 +18,7 @@ import { UserComponent } from './admin/components/userComponent/user.component';
 import { AdminGuard } from './admin/guards/admin.guard';
 import { LoginGuard } from './admin/guards/login.guard';
 import { ProjectComponent } from './admin/components/project/list-project/project.component';
+import { BlogSliderComponent } from './components/blog-slider';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'contact-us', component: ContactUsComponent, title: 'Contact Us ' },
     { path: 'terms-conditions', component: TermsConditionsComponent, title: 'Terms Conditions ' },
     { path: 'privacy-policy', component: PrivacyPolicyComponent, title: 'Privacy Policy ' },
+    { path: 'blog-slider', component: BlogSliderComponent, title: 'blog-slider ' },
     {path: 'user', component: UserComponent},
     {path: 'admin', component: AdminDashboardComponent, canActivate: [LoginGuard]},
     {path: 'login', component: LoginComponent , canActivate: [AdminGuard]},

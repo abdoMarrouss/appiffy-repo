@@ -29,7 +29,7 @@ let ProjectService = class ProjectService {
         return this.projectRepository.find();
     }
     async getProjectById(id) {
-        const project = await this.projectRepository.findOne(id);
+        const project = await this.projectRepository.findOne({ where: { id } });
         if (!project) {
             throw new common_1.NotFoundException(`Project with ID ${id} not found`);
         }

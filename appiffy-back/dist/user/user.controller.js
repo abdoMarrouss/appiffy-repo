@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const CreateUser_dto_1 = require("./dto/CreateUser.dto");
 const UpdateUser_dto_1 = require("./dto/UpdateUser.dto");
 const user_service_1 = require("./user.service");
+const local_auth_guard_1 = require("../auth/local/local-auth.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -38,6 +39,7 @@ let UserController = class UserController {
     }
 };
 __decorate([
+    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     (0, common_1.Get)('/users'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

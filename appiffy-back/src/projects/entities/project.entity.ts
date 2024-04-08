@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn, Index, Unique, OneToMany } from
 export class Project {
 
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: number
 
   @Column()
   projectName: string
