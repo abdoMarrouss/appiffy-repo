@@ -9,28 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameController = void 0;
+exports.RolesGuard = void 0;
 const common_1 = require("@nestjs/common");
-const game_service_1 = require("./game.service");
-const jwt_auth_guard_1 = require("../auth/jwt/jwt-auth.guard");
-let GameController = class GameController {
-    constructor(gameService) {
-        this.gameService = gameService;
+const core_1 = require("@nestjs/core");
+let RolesGuard = class RolesGuard {
+    constructor(reflector) {
+        this.reflector = reflector;
     }
-    getGameInfos() {
-        return this.gameService.getGameInfo();
+    canActivate(context) {
+        const requiredRoles = this.reflector.get('role', context.getHandler());
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+        const { user } = context.switchToHttp().getRequest();
+        if (!user || !user.role) {
+            return false;
+        }
+        console.log(`[User :  [${user.username}][${user.userId}] Has Role : [${user.role}]]`);
+        return requiredRoles.some(role => user.role === role);
     }
 };
-__decorate([
-    (0, common_1.Get)(),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], GameController.prototype, "getGameInfos", null);
-GameController = __decorate([
-    (0, common_1.Controller)("game"),
-    __metadata("design:paramtypes", [game_service_1.GameService])
-], GameController);
-exports.GameController = GameController;
-//# sourceMappingURL=game.controller.js.map
+RolesGuard = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [core_1.Reflector])
+], RolesGuard);
+exports.RolesGuard = RolesGuard;
+//# sourceMappingURL=role.guard.js.map
