@@ -5,16 +5,20 @@ import { UpdateUserDto } from './dto/UpdateUser.dto'
 import { User } from './entities/user.entity'
 import { UserService } from './user.service'
 import { LocalAuthGuard } from 'src/auth/local/local-auth.guard'
+import { RolesGuard } from 'src/auth/jwt/role.guard'
+import { HasRoles } from 'src/auth/decorator/rote.decorator'
+import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard'
 
 @Controller()
 export class UserController {
-    
+
   constructor(
     private userService: UserService
-  ) {}
+  ) { }
 
-  
-  @UseGuards(LocalAuthGuard)
+
+  @HasRoles(['client', 'admin']) 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('/users')
   async getUsers(): Promise<User[]> {
     return await this.userService.getAllUsers()

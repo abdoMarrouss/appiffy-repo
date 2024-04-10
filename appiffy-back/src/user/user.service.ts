@@ -43,6 +43,7 @@ export class UserService {
     newUser.username = createUserDto.username
     newUser.password = createUserDto.password
     newUser.email = createUserDto.email
+    newUser.role = createUserDto.role
 
     return await this.userRepository.save(newUser)
   }
