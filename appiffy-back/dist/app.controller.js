@@ -11,18 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var AppController_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt/jwt-auth.guard");
 const public_auth_guard_1 = require("./auth/common/public-auth.guard");
 const user_decorator_1 = require("./auth/common/user.decorator");
-let AppController = class AppController {
+let AppController = AppController_1 = class AppController {
+    constructor() {
+        this.logger = new common_1.Logger(AppController_1.name);
+    }
     publicRoute() {
         return 'Public route';
     }
     privateRoute(user) {
         return `Private route: Hello ${user.username}`;
+    }
+    getHello() {
+        this.logger.log('This is a log message');
+        this.logger.warn('This is a warning message');
+        this.logger.error('This is an error message');
+        return 'Hello World!';
     }
 };
 __decorate([
@@ -40,7 +50,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", String)
 ], AppController.prototype, "privateRoute", null);
-AppController = __decorate([
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], AppController.prototype, "getHello", null);
+AppController = AppController_1 = __decorate([
     (0, common_1.Controller)()
 ], AppController);
 exports.AppController = AppController;
