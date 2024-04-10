@@ -18,6 +18,11 @@ export class User {
   @Column()
   password: string
 
+  // @Column({ default: 'client' }) 
+  @Column()
+  role: string;
+
+
   @OneToMany(() => RefreshSession, refreshSession => refreshSession.user)
   sessions: RefreshSession[]
 

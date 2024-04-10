@@ -14,12 +14,12 @@ import { User } from '../user/entities/user.entity'
 export class AuthService {
 
   constructor(
-    @InjectRepository(RefreshSession) 
+    @InjectRepository(RefreshSession)
     private sessionRepository: Repository<RefreshSession>,
     private userService: UserService,
     private jwtService: JwtService,
     private configService: ConfigService
-  ) {}
+  ) { }
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.userService.getUserByUsername(username)
@@ -28,17 +28,14 @@ export class AuthService {
       const { password, ...result } = user
       return result
     }
-    
     return null
   }
 
-  async login(user: any) {
-    
-    const accessToken = await this.generateAccessToken({ id: user.id, username: user.username })
-    const refreshToken = await this.generateRefreshToken({ id: user.id })
-    
-    await this.createRefreshSession(user.id, refreshToken)
 
+  async login(user: any) {
+    const accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email: user.email, role: user.role })
+    const refreshToken = await this.generateRefreshToken({ id: user.id })
+    await this.createRefreshSession(user.id, refreshToken)
     return {
       user,
       accessToken,
@@ -46,71 +43,58 @@ export class AuthService {
     }
   }
 
+
   async createRefreshSession(userId: any, token: string) {
     const session = new RefreshSession()
-
     const decodeToken: any = this.jwtService.decode(token)
-
     session.user = userId
     session.refreshToken = token
     session.expiresIn = decodeToken.exp
     session.createdAt = decodeToken.iat
-
     return await this.sessionRepository.save(session)
   }
 
-  async generateAccessToken(payload: { id: number, username: string }): Promise<string> {
+
+  async generateAccessToken(payload: { id: number, username: string, email: string, role: string }): Promise<string> {
     const opts: SignOptions = {
-      expiresIn: this.configService.get<string>('JWT_ACCESS_EXPIRESIN'),
-      subject: String(payload.id)
-    }
-
-    return this.jwtService.signAsync({
-      username: payload.username,
-      sid: nanoid() // token uniqueness
-    }, opts)
-  }
-
+        expiresIn: this.configService.get<string>('JWT_ACCESS_EXPIRESIN'),
+        subject: String(payload.id)
+    };
+    return this.jwtService.signAsync(payload, opts); // Include the complete payload
+}
   async generateRefreshToken(payload: { id: number }): Promise<string> {
     const opts: SignOptions = {
       expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRESIN'),
       subject: String(payload.id)
     }
-
     return this.jwtService.signAsync({
       sid: nanoid() // token uniqueness
     }, opts)
   }
 
   async refreshToken(token: string) {
-
     try {
       var decodeToken: any = this.jwtService.verify(token)
-    } catch(err) {
+    } catch (err) {
       throw new UnauthorizedException()
     }
-
     let user: User = await this.userService.getUserById(decodeToken.sub)
-
     let session: RefreshSession = await this.sessionRepository.findOne({ where: { refreshToken: token } })
-    if(!session) throw new UnauthorizedException()
-
-    const accessToken = await this.generateAccessToken({ id: user.id, username: user.username })
+    if (!session) throw new UnauthorizedException()
+    const accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email:user.email, role: user.role })
     const refreshToken = await this.generateRefreshToken({ id: user.id })
-
     const decodeNewToken: any = this.jwtService.decode(refreshToken)
-    
     session.createdAt = decodeNewToken.iat
     session.expiresIn = decodeNewToken.exp
     session.refreshToken = refreshToken
-
     await this.sessionRepository.save(session)
-
     return {
       user,
       accessToken,
       refreshToken
     }
   }
+
+
 
 }
