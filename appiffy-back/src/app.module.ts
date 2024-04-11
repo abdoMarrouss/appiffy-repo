@@ -10,7 +10,7 @@ import { AuthModule } from './auth/auth.module'
 import { RefreshSession } from './auth/entities/refreshSession.entity'
 import { ProjectModule } from './projects/project.module'
 import { Project } from './projects/entities/project.entity'
-import { LogMiddleware } from './log/log-middleware'
+import { LogMiddleware } from './config/logs/log.middleware'
 
 @Module({
   imports: [ConfigModule.forRoot({

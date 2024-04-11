@@ -20,7 +20,7 @@ const auth_module_1 = require("./auth/auth.module");
 const refreshSession_entity_1 = require("./auth/entities/refreshSession.entity");
 const project_module_1 = require("./projects/project.module");
 const project_entity_1 = require("./projects/entities/project.entity");
-const log_middleware_1 = require("./log/log-middleware");
+const log_middleware_1 = require("./config/logs/log.middleware");
 let AppModule = class AppModule {
     constructor() {
     }
