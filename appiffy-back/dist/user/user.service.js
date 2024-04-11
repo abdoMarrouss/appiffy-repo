@@ -16,10 +16,13 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const bcrypt = require("bcrypt");
 const user_entity_1 = require("./entities/user.entity");
+const user_recovery_entity_1 = require("./entities/user-recovery.entity");
 let UserService = class UserService {
-    constructor(userRepository) {
+    constructor(userRepository, userRecoveryRepository) {
         this.userRepository = userRepository;
+        this.userRecoveryRepository = userRecoveryRepository;
     }
     async getAllUsers() {
         return await this.userRepository.find();
@@ -38,12 +41,24 @@ let UserService = class UserService {
         return user;
     }
     async createUser(createUserDto) {
-        let newUser = new user_entity_1.User();
-        newUser.username = createUserDto.username;
-        newUser.password = createUserDto.password;
-        newUser.email = createUserDto.email;
-        newUser.role = createUserDto.role;
-        return await this.userRepository.save(newUser);
+        try {
+            let userRecovery = new user_recovery_entity_1.UserRecovery();
+            userRecovery.username = createUserDto.username;
+            userRecovery.password = createUserDto.password;
+            userRecovery.email = createUserDto.email;
+            let newUser = new user_entity_1.User();
+            newUser.username = createUserDto.username;
+            newUser.email = createUserDto.email;
+            newUser.role = createUserDto.role;
+            const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+            newUser.password = hashedPassword;
+            await this.userRepository.save(newUser);
+            await this.userRecoveryRepository.save(userRecovery);
+            return newUser;
+        }
+        catch (e) {
+            console.log('error ', e);
+        }
     }
     async removeUser(id) {
         let user = await this.getUserById(id);
@@ -58,7 +73,9 @@ let UserService = class UserService {
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(user_recovery_entity_1.UserRecovery)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

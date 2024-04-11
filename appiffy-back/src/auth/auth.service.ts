@@ -9,6 +9,7 @@ import { ConfigService } from '@nestjs/config'
 import { UserService } from '../user/user.service'
 import { RefreshSession } from './entities/refreshSession.entity'
 import { User } from '../user/entities/user.entity'
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -21,14 +22,19 @@ export class AuthService {
     private configService: ConfigService
   ) { }
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.userService.getUserByUsername(username)
+  async validateUser(username: string, password: string): Promise<any> {
+    const user = await this.userService.getUserByUsername(username);
 
-    if (user && user.password === pass) {
-      const { password, ...result } = user
-      return result
+    if (user) {
+      // Compare the hashed password stored in the database with the hashed password provided during login
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (isPasswordValid) {
+        // If password is valid, return the user without the password
+        const { password, ...result } = user;
+        return result;
+      }
     }
-    return null
+    return null;
   }
 
 
