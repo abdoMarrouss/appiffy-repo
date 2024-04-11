@@ -13,11 +13,12 @@ const user_controller_1 = require("./user.controller");
 const user_service_1 = require("./user.service");
 const user_entity_1 = require("./entities/user.entity");
 const refreshSession_entity_1 = require("../auth/entities/refreshSession.entity");
+const user_recovery_entity_1 = require("./entities/user-recovery.entity");
 let UserModule = class UserModule {
 };
 UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, refreshSession_entity_1.RefreshSession])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, user_recovery_entity_1.UserRecovery, refreshSession_entity_1.RefreshSession])],
         controllers: [user_controller_1.UserController],
         providers: [user_service_1.UserService],
         exports: [user_service_1.UserService]

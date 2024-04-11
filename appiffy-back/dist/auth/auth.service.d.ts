@@ -10,7 +10,7 @@ export declare class AuthService {
     private jwtService;
     private configService;
     constructor(sessionRepository: Repository<RefreshSession>, userService: UserService, jwtService: JwtService, configService: ConfigService);
-    validateUser(username: string, pass: string): Promise<any>;
+    validateUser(username: string, password: string): Promise<any>;
     login(user: any): Promise<{
         user: any;
         accessToken: string;

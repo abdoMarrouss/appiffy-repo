@@ -21,6 +21,7 @@ const refreshSession_entity_1 = require("./auth/entities/refreshSession.entity")
 const project_module_1 = require("./projects/project.module");
 const project_entity_1 = require("./projects/entities/project.entity");
 const log_middleware_1 = require("./log/log-middleware");
+const user_recovery_entity_1 = require("./user/entities/user-recovery.entity");
 let AppModule = class AppModule {
     constructor() {
     }
@@ -42,7 +43,7 @@ AppModule = __decorate([
                 database: process.env.DB_NAME,
                 synchronize: true,
                 logging: false,
-                entities: [user_entity_1.User, refreshSession_entity_1.RefreshSession, project_entity_1.Project],
+                entities: [user_entity_1.User, user_recovery_entity_1.UserRecovery, refreshSession_entity_1.RefreshSession, project_entity_1.Project],
             }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,

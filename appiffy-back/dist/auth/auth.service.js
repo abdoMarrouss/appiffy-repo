@@ -32,6 +32,7 @@ const nanoid_1 = require("nanoid");
 const config_1 = require("@nestjs/config");
 const user_service_1 = require("../user/user.service");
 const refreshSession_entity_1 = require("./entities/refreshSession.entity");
+const bcrypt = require("bcrypt");
 let AuthService = class AuthService {
     constructor(sessionRepository, userService, jwtService, configService) {
         this.sessionRepository = sessionRepository;
@@ -39,11 +40,14 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
         this.configService = configService;
     }
-    async validateUser(username, pass) {
+    async validateUser(username, password) {
         const user = await this.userService.getUserByUsername(username);
-        if (user && user.password === pass) {
-            const { password } = user, result = __rest(user, ["password"]);
-            return result;
+        if (user) {
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (isPasswordValid) {
+                const { password } = user, result = __rest(user, ["password"]);
+                return result;
+            }
         }
         return null;
     }
