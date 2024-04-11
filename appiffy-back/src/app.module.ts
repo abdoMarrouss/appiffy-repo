@@ -11,7 +11,6 @@ import { RefreshSession } from './auth/entities/refreshSession.entity'
 import { ProjectModule } from './projects/project.module'
 import { Project } from './projects/entities/project.entity'
 import { LogMiddleware } from './log/log-middleware'
-import { UserRecovery } from './user/entities/user-recovery.entity'
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -26,7 +25,7 @@ import { UserRecovery } from './user/entities/user-recovery.entity'
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
-    entities: [User, UserRecovery, RefreshSession, Project],
+    entities: [User, RefreshSession, Project],
   }),
 
     UserModule,

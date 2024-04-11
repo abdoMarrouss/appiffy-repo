@@ -6,8 +6,6 @@ import { UpdateUserDto } from './dto/UpdateUser.dto'
 import * as bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity'
-import { UserRecovery } from './entities/user-recovery.entity'
-import { CreateUserRecoveryDto } from './dto/CreateUserRecovery.dto'
 
 @Injectable()
 export class UserService {
@@ -15,7 +13,6 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    @InjectRepository(UserRecovery) private userRecoveryRepository: Repository<UserRecovery>
 
   ) { }
 
@@ -44,12 +41,6 @@ export class UserService {
 
   async createUser(createUserDto: CreateUserDto) {
     try {
-      // let createUserRecoveryDto: CreateUserRecoveryDto;
-      let userRecovery = new UserRecovery();
-
-      userRecovery.username = createUserDto.username;
-      userRecovery.password = createUserDto.password;
-      userRecovery.email = createUserDto.email;
 
 
       let newUser = new User();
@@ -62,7 +53,6 @@ export class UserService {
   
       // Save the newUser entity to the database
       await this.userRepository.save(newUser);
-      await this.userRecoveryRepository.save(userRecovery);
   
       // Return the created user
       return newUser;
