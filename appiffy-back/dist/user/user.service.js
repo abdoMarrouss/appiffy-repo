@@ -18,11 +18,9 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const bcrypt = require("bcrypt");
 const user_entity_1 = require("./entities/user.entity");
-const user_recovery_entity_1 = require("./entities/user-recovery.entity");
 let UserService = class UserService {
-    constructor(userRepository, userRecoveryRepository) {
+    constructor(userRepository) {
         this.userRepository = userRepository;
-        this.userRecoveryRepository = userRecoveryRepository;
     }
     async getAllUsers() {
         return await this.userRepository.find();
@@ -42,10 +40,6 @@ let UserService = class UserService {
     }
     async createUser(createUserDto) {
         try {
-            let userRecovery = new user_recovery_entity_1.UserRecovery();
-            userRecovery.username = createUserDto.username;
-            userRecovery.password = createUserDto.password;
-            userRecovery.email = createUserDto.email;
             let newUser = new user_entity_1.User();
             newUser.username = createUserDto.username;
             newUser.email = createUserDto.email;
@@ -53,7 +47,6 @@ let UserService = class UserService {
             const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
             newUser.password = hashedPassword;
             await this.userRepository.save(newUser);
-            await this.userRecoveryRepository.save(userRecovery);
             return newUser;
         }
         catch (e) {
@@ -73,9 +66,7 @@ let UserService = class UserService {
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __param(1, (0, typeorm_1.InjectRepository)(user_recovery_entity_1.UserRecovery)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map
