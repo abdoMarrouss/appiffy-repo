@@ -10,7 +10,6 @@ import { AuthModule } from './auth/auth.module'
 import { RefreshSession } from './auth/entities/refreshSession.entity'
 import { ProjectModule } from './projects/project.module'
 import { Project } from './projects/entities/project.entity'
-import { LogMiddleware } from './config/logs/log.middleware'
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -34,13 +33,6 @@ import { LogMiddleware } from './config/logs/log.middleware'
   ],
   controllers: [AppController]
 })
-export class AppModule implements NestModule {
-
-  constructor() {
-    
-  }
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LogMiddleware).forRoutes('/logs');
-  }
+export class AppModule  {
 
 }
