@@ -25,7 +25,7 @@ export class AuthController {
 
 
   // @HasRoles(['client', 'admin']) 
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard)
   @Get('dashboard')
   async getDashboard(@Request() req) {
     return req.user;

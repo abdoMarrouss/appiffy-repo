@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const CreateUser_dto_1 = require("./dto/CreateUser.dto");
 const UpdateUser_dto_1 = require("./dto/UpdateUser.dto");
 const user_service_1 = require("./user.service");
+const role_guard_1 = require("../auth/jwt/role.guard");
+const rote_decorator_1 = require("../auth/decorator/rote.decorator");
+const jwt_auth_guard_1 = require("../auth/jwt/jwt-auth.guard");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -39,6 +42,8 @@ let UserController = class UserController {
 };
 exports.UserController = UserController;
 __decorate([
+    (0, rote_decorator_1.HasRoles)(['admin']),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, role_guard_1.RolesGuard),
     (0, common_1.Get)('/users'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),

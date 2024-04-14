@@ -1,13 +1,12 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common'
 
 import { CreateUserDto } from './dto/CreateUser.dto'
 import { UpdateUserDto } from './dto/UpdateUser.dto'
 import { User } from './entities/user.entity'
 import { UserService } from './user.service'
-// import { LocalAuthGuard } from 'src/auth/local/local-auth.guard'
-// import { RolesGuard } from 'src/auth/jwt/role.guard'
-// import { HasRoles } from 'src/auth/decorator/rote.decorator'
-// import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard'
+import { RolesGuard } from 'src/auth/jwt/role.guard'
+import { HasRoles } from 'src/auth/decorator/rote.decorator'
+import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard'
 
 @Controller()
 export class UserController {
@@ -17,8 +16,8 @@ export class UserController {
   ) { }
 
 
-//   @HasRoles(['client', 'admin']) 
-//   @UseGuards(JwtAuthGuard, RolesGuard)
+  @HasRoles(['admin']) 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get('/users')
   async getUsers(): Promise<User[]> {
     return await this.userService.getAllUsers()
