@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
 import { User } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
+import { RefreshSession } from './auth/entities/refreshSession.entity';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
@@ -20,12 +22,14 @@ import { UserModule } from './user/user.module';
     logging: false,
     entities: [
       User, 
-    // RefreshSession, 
+    RefreshSession, 
     // Project
   ],
   }),
 
   UserModule,
+  AuthModule, 
+
 
   ],
   controllers: [AppController],

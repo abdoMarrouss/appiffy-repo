@@ -4,11 +4,11 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
 import { User } from './entities/user.entity'
-// import { RefreshSession } from '../auth/entities/refreshSession.entity'
+import { RefreshSession } from '../auth/entities/refreshSession.entity'
 
 @Module({
   imports: [TypeOrmModule.forFeature([User,
-    //  RefreshSession
+     RefreshSession
     ])],
   controllers: [UserController],
   providers: [UserService],

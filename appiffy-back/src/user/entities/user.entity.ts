@@ -1,4 +1,4 @@
-// import { RefreshSession } from '../../auth/entities/refreshSession.entity'
+import { RefreshSession } from '../../auth/entities/refreshSession.entity'
 import { Entity, Column, PrimaryGeneratedColumn, Index, Unique, OneToMany } from 'typeorm'
 
 @Entity('user')
@@ -18,12 +18,11 @@ export class User {
   @Column()
   password: string
 
-  // @Column({ default: 'client' }) 
   @Column()
   role: string;
 
 
-//   @OneToMany(() => RefreshSession, refreshSession => refreshSession.user)
-//   sessions: RefreshSession[]
+  @OneToMany(() => RefreshSession, refreshSession => refreshSession.user)
+  sessions: RefreshSession[]
 
 }
