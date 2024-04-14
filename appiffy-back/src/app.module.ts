@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
+import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
@@ -16,10 +18,15 @@ import { ConfigModule } from '@nestjs/config'
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
-    // entities: [User, RefreshSession, Project],
+    entities: [
+      User, 
+    // RefreshSession, 
+    // Project
+  ],
   }),
 
-   
+  UserModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
