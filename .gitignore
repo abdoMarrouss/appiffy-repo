@@ -1,0 +1,43 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/appiffy-ui/dist
+/appiffy-ui/tmp
+/appiffy-ui/out-tsc
+/appiffy-ui/bazel-out
+/appiffy-ui/src/scripts
+/appiffy-ui/.scannerwork
+# Node
+/appiffy-ui/node_modules
+/appiffy-ui/npm-debug.log
+/appiffy-ui/yarn-error.log
+
+# IDEs and editors
+/appiffy-ui/.idea/
+/appiffy-ui/.project
+/appiffy-ui/.classpath
+/appiffy-ui/.c9/
+/appiffy-ui/*.launch
+/appiffy-ui/.settings/
+/appiffy-ui/*.sublime-workspace
+
+# Visual Studio Code
+/appiffy-ui/.vscode/*
+/appiffy-ui/!.vscode/settings.json
+/appiffy-ui/!.vscode/tasks.json
+/appiffy-ui/!.vscode/launch.json
+/appiffy-ui/!.vscode/extensions.json
+/appiffy-ui/.history/*
+
+# Miscellaneous
+/appiffy-ui/.angular/cache
+.sass-cache/
+/appiffy-ui/connect.lock
+/appiffy-ui/coverage
+/appiffy-ui/libpeerconnection.log
+/appiffy-ui/testem.log
+/appiffy-ui/typings
+
+# System files
+/appiffy-ui/.DS_Store
+/appiffy-ui/Thumbs.db
