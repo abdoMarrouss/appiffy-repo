@@ -95,6 +95,12 @@ let AuthService = class AuthService {
             refreshToken
         };
     }
+    async revokeRefreshToken(userId) {
+        await this.sessionRepository.delete({ user: userId });
+    }
+    async logout(userId) {
+        await this.userService.updateOne(userId, { password: null });
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

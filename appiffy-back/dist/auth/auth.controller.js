@@ -32,6 +32,10 @@ let AuthController = class AuthController {
     async getDashboard(req) {
         return req.user;
     }
+    async logout(req) {
+        await this.authService.revokeRefreshToken(req.user.id);
+        return { message: 'Logged out successfully' };
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -57,6 +61,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "getDashboard", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Delete)('logout'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logout", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

@@ -95,6 +95,15 @@ export class AuthService {
     }
   }
 
+  async revokeRefreshToken(userId: any): Promise<void> {
+    // Find and delete the refresh token associated with the user
+    await this.sessionRepository.delete({ user: userId });
+  }
+
+  async logout(userId: any) {
+    await this.userService.updateOne(userId, { password: null });
+  }
+
 
 
 }

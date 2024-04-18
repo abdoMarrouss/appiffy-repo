@@ -31,4 +31,6 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
     }>;
+    revokeRefreshToken(userId: any): Promise<void>;
+    logout(userId: any): Promise<void>;
 }

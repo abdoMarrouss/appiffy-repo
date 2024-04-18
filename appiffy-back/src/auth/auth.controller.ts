@@ -1,9 +1,10 @@
-import { Controller, Post, UseGuards, Body, Get, Request  } from '@nestjs/common'
+import { Controller, Post, UseGuards, Body, Get, Request, Delete, HttpCode, HttpStatus  } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { User } from './common/user.decorator'
 import { RefreshDto } from './dto/Refresh.dto'
 import { LocalAuthGuard } from './local/local-auth.guard'
 import { JwtAuthGuard } from './jwt/jwt-auth.guard'
+import { GetCurrentUserId } from './decorator/get-current-userId-decorator'
 // import { HasRoles } from './decorator/rote.decorator'
 // import { RolesGuard } from './jwt/role.guard'
 
@@ -30,5 +31,15 @@ export class AuthController {
   async getDashboard(@Request() req) {
     return req.user;
   }
+
+
+   @UseGuards(JwtAuthGuard)
+   @Delete('logout')
+   async logout(@Request() req) {
+     await this.authService.revokeRefreshToken(req.user.id);
+     return { message: 'Logged out successfully' };
+   }
+
+
   
 }

@@ -54,6 +54,9 @@ let UserService = class UserService {
         user.password = updateUserDto.password;
         return await this.userRepository.save(user);
     }
+    async updateOne(userId, data) {
+        await this.userRepository.update(userId, data);
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
