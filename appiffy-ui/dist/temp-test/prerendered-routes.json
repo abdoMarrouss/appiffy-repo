@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "/",
+    "/dashboard",
+    "/dashboard/art/generate",
+    "/home",
+    "/login"
+  ]
+}

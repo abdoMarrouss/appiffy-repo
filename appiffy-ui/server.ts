@@ -4,7 +4,6 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import AppServerModule from './src/main.server';
-import 'localstorage-polyfill'
 
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -18,7 +17,6 @@ export function app(): express.Express {
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
-  global['localStorage'] = localStorage;
 
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
