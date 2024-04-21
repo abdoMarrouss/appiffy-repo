@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,14 +9,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  userData: any;  
   localStorage: any
 
 
   constructor(
     private renderer: Renderer2,
-    private route: ActivatedRoute,
-    private router: Router
+    // private route: ActivatedRoute,
+    private router: Router,
+    private adminService: AdminService
 
   ) {
 
@@ -107,6 +108,23 @@ export class DashboardComponent implements OnInit {
       link.href = url;
       document.head.appendChild(link);
     }
+  }
+
+
+  async onLogout() {
+    try {
+      await this.adminService.logout().toPromise();
+      // Clear tokens from local storage
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      // Redirect user to login page or perform other actions
+      this.router.navigate(['/login']);
+      console.log('Logout successful');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Handle logout error
+    }
+  
   }
 
 }

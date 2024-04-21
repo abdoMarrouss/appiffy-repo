@@ -21,19 +21,19 @@ export class AdminService {
     }
 
     login(username: string, password: string): Observable<any> {
-        const body = { username, password }; 
+        let body = { username, password }; 
         return this.http.post(`${this.apiUrl}/auth/login`, body);
     }
 
     logout(): Observable<any> {
-      const headers = this.getHeaders();
+      let headers = this.getHeaders();
       return this.http.delete(`${this.apiUrl}/auth/logout`, { headers });
     }
 
 
     storeTokens(accessToken: string, refreshToken: string): void {
-        const userDataString = atob(accessToken.split('.')[1]);
-        const userData: User = JSON.parse(userDataString); // Parsing JSON string into object
+        let userDataString = atob(accessToken.split('.')[1]);
+        let userData: User = JSON.parse(userDataString); // Parsing JSON string into object
         console.log('token here : ', userData.id, userData.username, userData.role, userData.email);
         if (typeof localStorage !== 'undefined') {
         localStorage.setItem('accessToken', accessToken);
@@ -42,7 +42,7 @@ export class AdminService {
     }
 
     private getHeaders(): HttpHeaders {
-        const accessToken = localStorage.getItem('accessToken');
+        let accessToken = localStorage.getItem('accessToken');
         return new HttpHeaders({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`
@@ -50,14 +50,14 @@ export class AdminService {
       }
     
       getData(): Observable<any> {
-        const headers = this.getHeaders();
+        let headers = this.getHeaders();
         return this.http.get(`${this.apiUrl}/private`, { headers , responseType: 'text'});
       }
 
       isLoggedIn(): boolean {
         if (typeof localStorage !== 'undefined') {
             // Logic to handle when localStorage is available
-            const accessToken = localStorage.getItem('accessToken');
+            let accessToken = localStorage.getItem('accessToken');
             return !!accessToken; // Returns true if access token is present, otherwise false
         }
         // Handle scenario when localStorage is not available (optional)

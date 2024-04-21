@@ -29,16 +29,16 @@ let AuthService = class AuthService {
         this.configService = configService;
     }
     async validateUser(username, pass) {
-        const user = await this.userService.getUserByUsername(username);
+        let user = await this.userService.getUserByUsername(username);
         if (user && user.password === pass) {
-            const { password, ...result } = user;
+            let { password, ...result } = user;
             return result;
         }
         return null;
     }
     async login(user) {
-        const accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email: user.email, role: user.role });
-        const refreshToken = await this.generateRefreshToken({ id: user.id });
+        let accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email: user.email, role: user.role });
+        let refreshToken = await this.generateRefreshToken({ id: user.id });
         await this.createRefreshSession(user.id, refreshToken);
         return {
             user,
@@ -47,8 +47,8 @@ let AuthService = class AuthService {
         };
     }
     async createRefreshSession(userId, token) {
-        const session = new refreshSession_entity_1.RefreshSession();
-        const decodeToken = this.jwtService.decode(token);
+        let session = new refreshSession_entity_1.RefreshSession();
+        let decodeToken = this.jwtService.decode(token);
         session.user = userId;
         session.refreshToken = token;
         session.expiresIn = decodeToken.exp;
@@ -56,14 +56,14 @@ let AuthService = class AuthService {
         return await this.sessionRepository.save(session);
     }
     async generateAccessToken(payload) {
-        const opts = {
+        let opts = {
             expiresIn: this.configService.get('JWT_ACCESS_EXPIRESIN'),
             subject: String(payload.id)
         };
         return this.jwtService.signAsync(payload, opts);
     }
     async generateRefreshToken(payload) {
-        const opts = {
+        let opts = {
             expiresIn: this.configService.get('JWT_REFRESH_EXPIRESIN'),
             subject: String(payload.id)
         };
@@ -82,9 +82,9 @@ let AuthService = class AuthService {
         let session = await this.sessionRepository.findOne({ where: { refreshToken: token } });
         if (!session)
             throw new common_1.UnauthorizedException();
-        const accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email: user.email, role: user.role });
-        const refreshToken = await this.generateRefreshToken({ id: user.id });
-        const decodeNewToken = this.jwtService.decode(refreshToken);
+        let accessToken = await this.generateAccessToken({ id: user.id, username: user.username, email: user.email, role: user.role });
+        let refreshToken = await this.generateRefreshToken({ id: user.id });
+        let decodeNewToken = this.jwtService.decode(refreshToken);
         session.createdAt = decodeNewToken.iat;
         session.expiresIn = decodeNewToken.exp;
         session.refreshToken = refreshToken;
